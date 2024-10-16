@@ -1,0 +1,35 @@
+{
+    "displaydata": {
+      "header": [
+        "Last Reading Date",
+        "Last Reading",
+        "Current Reading Date",
+        "Current Reading",
+        "Per Unit Rate"
+      ],
+      "body": [
+        {
+          "Last Reading Date": "01-Oct-2021",
+          "Last Reading": "1000",
+          "Current Reading Date": "01-Oct-2021",
+          "Current Reading": "1024",
+          "Per Unit Rate": "9"
+        },
+        {
+          "Last Reading Date": "01-Oct-2021",
+          "Last Reading": "1000",
+          "Current Reading Date": "01-Oct-2021",
+          "Current Reading": "1024",
+          "Per Unit Rate": "9"
+        },
+        {
+          "Last Reading Date": "01-Oct-2021",
+          "Last Reading": "1000",
+          "Current Reading Date": "01-Oct-2021",
+          "Current Reading": "1024",
+          "Per Unit Rate": "9"
+        }
+      ]
+    }
+  }
+  

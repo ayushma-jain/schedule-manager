@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.calendar {
+    padding: 20px;
+    /* margin: auto; */
+    width: 100%;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  
+  .calendar-day {
+    padding: 30px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: white;
+  }
+  
+  .empty {
+    background-color: transparent;
+  }
+  
+  .today {
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+  }
+  .sidebar{
+    position: fixed;
+    left: 0;
+    padding: 27px;
+    top: 0px;
+    height: calc(100% - 0px);
+    background: aquamarine;
+    width: 80px;
+  }
+  .menu li{
+    padding: 20px 0px ;
+  }
+  .content-body{
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: 100px;
+    margin-right: 10px;
+  }
+
+  .headline{
+    font-size: 50px;
+    margin: 5%;
+    /* transform: rotate(359deg); */
+    font-family: monospace;
+    text-transform: capitalize;
+    /* background-image: linear-gradient(white, aquamarine, white); */
+    padding: 15px;
+    width: 400px;
+    height: 250px;
+    color: white;
+  }
+  .home_front{
+    background: url(/images/home_bg.png);
+    height: 450px;
+    width: 100%;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+  
+  .bg-aquamarine{
+    background: aquamarine!important;
+  }   
