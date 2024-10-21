@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActionLog;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\FormDetails;
 use App\Models\FormFields;
@@ -11,6 +12,7 @@ use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -62,19 +64,10 @@ class ProfileController extends Controller
     {
         $navComponents = UserActionType::Where(['action_id'=>3])->select(['id  as index','action_title as value'])->get()->toArray();
         
-        
         return Inertia::render('Profile/Todo',compact('navComponents'));
     }
 
-    /**
-     * Dispaly settings view.
-     */
-    public function settingView(){
-        $userActions = UserAction::Select(['id as index','action_name as value'])->get()->toArray();
-        $userActionType = UserActionType::Where(['action_id'=>1])->select(['id  as index','action_title as value'])->get()->toArray();
-        $formfields = FormFields::Where(['status'=>'Active'])->select(['id as index','field_type as value'])->get()->toArray();
-        return Inertia::render('Profile/Setting',compact('userActions','userActionType','formfields'));
-    }
+   
 
     public function actionCreateFormView(){
         
@@ -82,11 +75,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Partials/CreateActionForm',compact('userActions','userActionType'));
     }
 
-    public function GenerateNewFormView(){
-        $userActions = UserAction::Select(['id as index','action_name as value'])->get()->toArray();
-        $userActionType = UserActionType::Where(['action_id'=>1])->select(['id  as index','action_title as value'])->get()->toArray();
-        return Inertia::render('Profile/Partials/GenerateNewForm',compact('userActions'));
-    }
+
     
     Public function saveElectricityDetails(Request $request){
         // Validate the request data
@@ -127,12 +116,22 @@ class ProfileController extends Controller
             'action_type' => 'required',
             'fields' => 'required', // Make sure to handle password confirmation
         ]);
-        $formDetails = FormDetails::create([
-            'action_type_id' => $validatedData['action_type'],
-            'form_json' => json_encode($validatedData['fields']),
-            'status' => 1
-        ]);
+        // $formDetails = FormDetails::create([
+        //     'action_type_id' => $validatedData['action_type'],
+        //     'form_json' => json_encode($validatedData['fields']),
+        //     'status' => 1
+        // ]);
         
+        if($request->input('form_id')){
+echo "!";
+        }else{
+            // $formDetails = FormDetails::create([
+            //     'action_type_id' => $validatedData['action_type'],
+            //     'form_json' => json_encode($validatedData['fields']),
+            //     'status' => 1
+            // ]);
+        }
+        die();
         return response()->json(['message' => 'Form Created Successfully!!', 'data' => $formDetails], 201);
     }
 
@@ -193,7 +192,8 @@ class ProfileController extends Controller
             'action_title' => $validatedData['action'],
             'action_id' => $validatedData['action_type']
         ]);
-        
+        $actionTitle = "New '".$validatedData['action']."' Action Type Created";
+        event(new ActionLog(['user_id'=>Auth::id(),'action_title'=>$actionTitle]));
         return response()->json(['message' => 'Form Created Successfully!!', 'data' => $userActionType], 201);
     }
 }

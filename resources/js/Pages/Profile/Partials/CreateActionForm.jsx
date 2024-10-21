@@ -8,12 +8,10 @@ import React, { useState } from 'react'
 const CreateActionForm = ({userActions}) => {
     const [formData,setFormData] = useState({'action':'','action_type':''});
 
-console.log(formData);
     const addNewAction = async (e) => {
         e.preventDefault();
         
         const response = await ajaxCall('/create-action-type','POST',formData);
-        console.log(response);
    
     };
     const handleInputChange = (field,value) => {

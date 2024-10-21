@@ -5,6 +5,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import SideNav from '@/Components/SideNav';
+import { BrowserRouter } from 'react-router-dom';
 
 export default function Authenticated({ header, children }) {
     const user = usePage().props.auth.user;
@@ -13,6 +14,7 @@ export default function Authenticated({ header, children }) {
 
     return (
         <div className="min-h-screen bg-gray-100">
+            <BrowserRouter>
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
@@ -24,9 +26,8 @@ export default function Authenticated({ header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
+                                {/* <SideNav /> */}
+                               
                             </div>
                         </div>
 
@@ -95,9 +96,10 @@ export default function Authenticated({ header, children }) {
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+                        {/* <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
-                        </ResponsiveNavLink>
+                        </ResponsiveNavLink> */}
+                        <SideNav type={'Responsive'}/>
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200">
@@ -115,11 +117,18 @@ export default function Authenticated({ header, children }) {
                     </div>
                 </div>
             </nav>
-            <SideNav></SideNav>
+            {/* <SideNav></SideNav> */}
+            <div className=" hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div className='sidebar'>
+                    <nav className="mt-6 space-y-2 w-full">
+                        <SideNav></SideNav>
+                    </nav>
+                </div>
+            </div>
             
             {header && (
                 <header className="bg-white shadow" style={{ marginLeft: '80px' }} >
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
+                    <div className="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
                 </header>
             )}
 
@@ -133,6 +142,7 @@ export default function Authenticated({ header, children }) {
                     </div>
                 </main>
             </div>
+            </BrowserRouter>
         </div>
     );
 }

@@ -44,7 +44,7 @@
     top: 0px;
     height: calc(100% - 0px);
     background: aquamarine;
-    width: 80px;
+    width: 200px;
   }
   .menu li{
     padding: 20px 0px ;
@@ -52,7 +52,7 @@
   .content-body{
     margin-top: 30px;
     margin-bottom: 50px;
-    margin-left: 100px;
+    margin-left: 200px;
     margin-right: 10px;
   }
 

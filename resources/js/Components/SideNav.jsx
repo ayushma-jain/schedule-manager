@@ -1,28 +1,83 @@
 import { Link } from '@inertiajs/react';
-import React from 'react';
-import { MdDashboard } from "react-icons/md";
-import { FaMoneyCheckAlt,FaTasks } from "react-icons/fa";
-import { AiFillSchedule } from "react-icons/ai";
-import { GoGoal } from "react-icons/go";
-import { IoIosSettings } from "react-icons/io";
-import Tooltip from './Tooltip';
+import React, { useState } from 'react';
+import ResponsiveNavLink from './ResponsiveNavLink';
 
+const SideNav = ({type}) => {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  // State to track submenu visibility
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
 
-
-const SideNav = () => {
+  // Toggle submenu visibility
+  const toggleSubmenu = () => {
+ 
+    setIsSubmenuOpen(!isSubmenuOpen);
+    console.log(isSubmenuOpen);
+  };
   return (
-    <div className='sidebar'>
-        <div className='menu'>
-            <ul>
-                <li><Tooltip title="Dashboard" ><Link href={route('dashboard')} className='text-2xl'><MdDashboard/></Link></Tooltip></li>
-                <li><Tooltip title="Schedule" ><Link href={route('task.list')} className='text-2xl'><AiFillSchedule/></Link></Tooltip></li>
-                <li><Tooltip title="Todo" ><Link href={route('todo.view')} className='text-2xl'><FaTasks/></Link></Tooltip></li>
-                <li><Tooltip title="Goals" ><Link href={route('goal.view')} className='text-2xl'><GoGoal/></Link></Tooltip></li>
-                <li><Tooltip title="Expenses" ><Link href={route('expenses')} className='text-2xl'><FaMoneyCheckAlt/></Link></Tooltip></li>
-                <li><Tooltip title="Settings" ><Link href={route('setting')} className='text-2xl'><IoIosSettings/></Link></Tooltip></li>
-            </ul>
-        </div>
-    </div>
+    <>
+    {(type && type ===  'Responsive' ? (
+      <> <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+      <span >Dashboard</span>
+    </ResponsiveNavLink>
+    <ResponsiveNavLink href={route('task.list')} active={route().current('task.list')}>
+      <span >Schedule</span>
+    </ResponsiveNavLink>
+    <ResponsiveNavLink href={route('todo.view')} active={route().current('todo.view')}>
+      <span >Todo</span>
+    </ResponsiveNavLink>
+
+    <ResponsiveNavLink href={route('goal.view')} active={route().current('goal.view')}>
+      <span >Goals</span>
+    </ResponsiveNavLink>
+    <ResponsiveNavLink href={route('expenses')} active={route().current('expenses')}>
+      <span >Expenses</span>
+    </ResponsiveNavLink>
+    <ResponsiveNavLink href={route('action-form')} active={route().current('action-form')}>
+      <span >Settings</span>
+    </ResponsiveNavLink></>
+    ):(
+      <>
+        <Link href={route('dashboard')} className="block w-full py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none border-transparent hover:text-gray-700 hover:bg-gray-300 focus:bg-gray-300 focus:text-gray-700" active={route().current('dashboard')}>
+          <span >Dashboard</span>
+        </Link>
+        <Link href={route('task.list')} className="block w-full py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none border-transparent hover:text-gray-700 hover:bg-gray-300 focus:bg-gray-300 focus:text-gray-700" active={route().current('task.list')}>
+          <span >Schedule</span>
+        </Link>
+        <Link href={route('todo.view')} className="block w-full py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none border-transparent hover:text-gray-700 hover:bg-gray-300 focus:bg-gray-300 focus:text-gray-700" active={route().current('todo.view')}>
+          <span >Todo</span>
+        </Link>
+    
+        <Link href={route('goal.view')} className="block w-full  py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none border-transparent hover:text-gray-700 hover:bg-gray-300 focus:bg-gray-300 focus:text-gray-700" active={route().current('goal.view')}>
+          <span >Goals</span>
+        </Link>
+        <Link href={route('expenses')} className="block w-full  py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none border-transparent hover:text-gray-700 hover:bg-gray-300 focus:bg-gray-300 focus:text-gray-700" active={route().current('expenses')}>
+          <span >Expenses</span>
+        </Link>
+        <li onClick={toggleSubmenu} className="relative block w-full  py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none border-transparent hover:text-gray-700 hover:bg-gray-300 focus:bg-gray-300 focus:text-gray-700" active={route().current('action-form')}>
+          <span >Settings</span>
+          <span style={{ marginLeft: '8px' }}>
+              {isSubmenuOpen ? '▼' : '▶'} 
+            </span>
+          {isSubmenuOpen && (
+            <div className="absolute left-0 mt-1 bg-white border border-gray-300 rounded shadow-lg w-full z-10">
+              {/* <Link
+                className="block w-full py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Profile
+              </Link>
+              <Link
+                className="block w-full py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Profile
+              </Link> */}
+              <Link href={route('action-form')} className="block w-full py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" active={route().current('action-form')}>Create Action Type</Link>
+              <Link href={route('generate-form')} className="block w-full py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" active={route().current('generate-form')}>Create Form</Link>
+            </div>
+          )}
+        </li>
+      </>
+    ))}
+  </>
   )
 }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
@@ -39,9 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/goal-view', [ProfileController::class,'goalView'])->name('goal.view');
     Route::get('/expenses', [ProfileController::class,'expenses'])->name('expenses');
     Route::get('/todo', [ProfileController::class,'todoView'])->name('todo.view');
-    Route::get('/setting/action-form',[ProfileController::class, 'settingView'])->name('setting');
+    Route::get('/action-form',[FormController::class, 'settingView'])->name('action-form');
    // Route::get('/setting/action-form',[ProfileController::class,'actionCreateFormView'])->name('action-form');
-    Route::get('/setting/generate-form',[ProfileController::class,'GenerateNewFormView'])->name('generate-form');
+    Route::get('/generate-form/{form_id?}',[FormController::class,'settingView'])->name('generate-form');
     Route::get('/get-action-type/{action_id?}',[ProfileController::class, 'getActionTypeList'])->name('get-action-type');
     Route::post('/save-electricity-details', [ProfileController::class,'saveElectricityDetails'])->name('save-electricity-details');
     Route::post('/create-form',[ProfileController::class,'createNewForm'])->name('create-form');

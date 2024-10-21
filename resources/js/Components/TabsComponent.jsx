@@ -10,12 +10,13 @@ const TabsComponent = ({navComponents}) => {
 
   const [activeTab, setActiveTab] = useState(navComponents[0].value);
   const [formJson,setFormJson] = useState([]);
+  const [formId,setFormId] = useState('');
 
   async function fetchData(index) {
     const response = await ajaxCall('/get-form-json/'+index,'GET');
-   
-    setFormJson(response.data.form_json);
-    console.log(formJson);
+    const formJson = (response.data.form_json != undefined && response.data.form_json != '') ? (response.data.form_json) :[];
+    setFormJson(formJson);
+    setFormId(response.data.id);
 }
   useEffect(()=>{
    
@@ -37,7 +38,6 @@ const TabsComponent = ({navComponents}) => {
                     className={`inline-block p-4 ${
                         activeTab === navItem.value ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600 border-b-2 border-transparent'
                     } focus:outline-none`}
-                    //onClick={() => setActiveTab(navItem.value)}
                     onClick={() => changeTabAction(navItem.index,navItem.value)}
                     >
                     {navItem.value}
@@ -58,15 +58,14 @@ const TabsComponent = ({navComponents}) => {
                     
                 )}
                 {(formJson && formJson.length>0 ? ( 
-                    <JSONForm formJson={formJson}/>
+                    <JSONForm formJson={formJson} formId={formId}/>
                 ) : (
                     <></>
                 ))}
                 </div>
                 <div className='col-span-1'></div>
                 <div className='col-span-6 py-5 mt-5'>
-                    
-                    <Table className="mt-5" disaplayData={json.displaydata}/>
+                    {/* <Table className="mt-5" disaplayData={json.displaydata}/> */}
                 </div>
             </div>
             
