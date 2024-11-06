@@ -11,8 +11,7 @@ class UserAction extends Model
 
     protected $table="user_action";
 
-    //  public static function getActionsList(){
-    //     echo '<pre>';print_r($this);die();
-        
-    // }
+    public function actionTypes(){
+        return $this->hasMany(UserActionType::class,'action_id','id');
+    }
 }

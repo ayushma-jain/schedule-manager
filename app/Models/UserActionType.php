@@ -12,5 +12,15 @@ class UserActionType extends Model
     protected $table="user_action_type";
      
     protected $fillable = ['action_title','action_id'];
+
+    // public function userAction()
+    // {
+    //     return $this->belongsTo(UserAction::class, 'action_id', 'id');
+    // }
+    
+    public function userAction()
+    {
+        return $this->hasOne(UserAction::class, 'id', 'action_id');
+    }
     
 }

@@ -6,6 +6,8 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import SideNav from '@/Components/SideNav';
 import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Authenticated({ header, children }) {
     const user = usePage().props.auth.user;
@@ -18,6 +20,11 @@ export default function Authenticated({ header, children }) {
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
+                        {header && (
+                            <header style={{ marginLeft: '100px' }} >
+                                <div className="max-w-6xl mx-auto py-5 px-4 sm:px-6 lg:px-8">{header}</div>
+                            </header>
+                        )}
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
@@ -32,6 +39,7 @@ export default function Authenticated({ header, children }) {
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
+                  
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -126,22 +134,20 @@ export default function Authenticated({ header, children }) {
                 </div>
             </div>
             
-            {header && (
-                <header className="bg-white shadow" style={{ marginLeft: '80px' }} >
-                    <div className="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
-                </header>
-            )}
+            
 
             
             <div className="max-w-full mx-auto sm:px-6 lg:px-8 space-y-6">
                
                 <main className='content-body'>
-                <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div className="sm:p-8 bg-white shadow sm:rounded-lg">
                     
                     {children}
                     </div>
                 </main>
             </div>
+             {/* Toast container must be included */}
+            <ToastContainer />
             </BrowserRouter>
         </div>
     );

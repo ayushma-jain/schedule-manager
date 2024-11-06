@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebController;
@@ -44,14 +45,18 @@ Route::middleware('auth')->group(function () {
    // Route::get('/setting/action-form',[ProfileController::class,'actionCreateFormView'])->name('action-form');
     Route::get('/generate-form/{form_id?}',[FormController::class,'settingView'])->name('generate-form');
     Route::get('/get-action-type/{action_id?}',[ProfileController::class, 'getActionTypeList'])->name('get-action-type');
-    Route::post('/save-electricity-details', [ProfileController::class,'saveElectricityDetails'])->name('save-electricity-details');
-    Route::post('/create-form',[ProfileController::class,'createNewForm'])->name('create-form');
+    Route::post('/create-form',[AjaxController::class,'createNewForm'])->name('create-form');
 
-    Route::get('/get-form-json/{action_type_id?}',[ProfileController::class,'getFormJson'])->name('get-form-json');
+    Route::get('/get-form-json/{action_type_id?}',[AjaxController::class,'getFormJson'])->name('get-form-json');
     Route::get('/get-form-fields',[ProfileController::class,'getFormFields'])->name('get-form-fields');
-    Route::post('create-action-type',[ProfileController::class,'createActionType'])->name('create-action-type');
+    Route::post('/create-action-type',[ProfileController::class,'createActionType'])->name('create-action-type');
 
-    
+    Route::post('/save-form-details',[FormController::class, 'saveFormRecords'])->name('save-form-details');
+
+    Route::get('/get-table-records/{form_id?}',[AjaxController::class,'getTableRecords'])->name('get-table-records');
+
+    Route::get('/get-validation-rules/{filed_id}',[AjaxController::class,'getValidationRules'])->name('get-validation-rules');
+    Route::get('/get-event-data/{event_id}',[AjaxController::class,'getEventData'])->name('get-event-data');
  
     
 });

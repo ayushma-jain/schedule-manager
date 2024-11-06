@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 
-const Select = ({options,name,id,onChange,value}) => {
+const Select = ({options,name,id,onChange,value,className=''}) => {
   
    
   return (
     <>
-        <select name={name} id={id} onChange={onChange} value={value} className="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select name={name} id={id} onChange={onChange} value={value} className={
+          'text-sm focus:border-indigo-500 focus:ring-indigo-500 shadow-sm ' +
+          className
+        }>
         <option value="">--Select--</option>
         {options && options.length > 0 ? (
         options.map((option, index) => (

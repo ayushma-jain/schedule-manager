@@ -9,9 +9,7 @@ const SideNav = ({type}) => {
 
   // Toggle submenu visibility
   const toggleSubmenu = () => {
- 
     setIsSubmenuOpen(!isSubmenuOpen);
-    console.log(isSubmenuOpen);
   };
   return (
     <>

@@ -4,11 +4,12 @@ import { Head } from '@inertiajs/react'
 import React from 'react'
 
 const Expense = ({navComponents}) => {
+  console.log(navComponents);
   return (
     <AuthenticatedLayout header={<h2 className='font-semibold text-xl text-gray-800 leading-tight'>Expenses</h2>}>
         <Head title='Expenses' />
  
-        <TabsComponent navComponents ={navComponents}/>
+        <TabsComponent navComponents ={navComponents} />
     </AuthenticatedLayout>
   )
 }

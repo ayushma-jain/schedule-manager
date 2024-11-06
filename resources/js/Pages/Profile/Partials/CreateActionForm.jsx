@@ -44,7 +44,7 @@ const CreateActionForm = ({userActions}) => {
                 <div className="col-span-5">
                     <InputLabel htmlFor="action_type"  value="Action Type" />
 
-                   <Select options = {userActions} value={formData.action_type} onChange={(e)=>handleInputChange('action_type',e.target.value)}/>
+                   <Select className="w-full" options = {userActions} value={formData.action_type} onChange={(e)=>handleInputChange('action_type',e.target.value)}/>
                     {/* <InputError message={errors.password} className="mt-2" /> */}
                 </div>
                 <div className="col-span-2 mt-4">

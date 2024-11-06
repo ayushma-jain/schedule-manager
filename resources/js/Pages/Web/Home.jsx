@@ -3,9 +3,11 @@ import Calender from '@/Components/Calender';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Button } from '@headlessui/react';
 import { Head, Link } from '@inertiajs/react';
+import EventList from './Partials.jsx/EventList';
+import { useState } from 'react';
 
-export default function Dashboard() {
-    
+export default function Dashboard({formRecords}) {
+   
     return (
         <GuestLayout
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
@@ -36,13 +38,13 @@ export default function Dashboard() {
                 </div> */}
             </div>
             <div className="grid grid-cols-12 gap-4 mx-auto px-4 pt-5">
-                
-                <div className="col-span-8 p-4">
-                    <Calender></Calender>
+            <Calender formRecords={formRecords}></Calender>
+                {/* <div className="col-span-8 p-4">
+                    <Calender formRecords={formRecords}></Calender>
                 </div>
                 <div className="col-span-4 p-4 border border-blue-500 p-4">
-                   
-                </div>
+                   <EventList eventName={eventName} eventList={eventName} color={color}></EventList>
+                </div> */}
             </div>
 
         </GuestLayout>

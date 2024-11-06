@@ -37,6 +37,7 @@ class ProfileController extends Controller
     public function tasksList(Request $request) : Response
     {
         $navComponents = UserActionType::Where(['action_id'=>1])->select(['id  as index','action_title as value'])->get()->toArray();
+
         return Inertia::render('Profile/Task',compact('navComponents'));
     }
 
@@ -53,7 +54,7 @@ class ProfileController extends Controller
      */
     public function expenses(Request $request) : Response
     {
-        $navComponents = UserActionType::Where(['action_id'=>4])->select(['id  as index','action_title as value'])->get()->toArray();
+        $navComponents = UserActionType::Where(['action_id'=>3])->select(['id  as index','action_title as value'])->get()->toArray();
         return Inertia::render('Profile/Expense',compact('navComponents'));
     }
 
@@ -62,31 +63,15 @@ class ProfileController extends Controller
      */
     public function todoView(Request $request) : Response
     {
-        $navComponents = UserActionType::Where(['action_id'=>3])->select(['id  as index','action_title as value'])->get()->toArray();
+        $navComponents = UserActionType::Where(['action_id'=>2])->select(['id  as index','action_title as value'])->get()->toArray();
         
         return Inertia::render('Profile/Todo',compact('navComponents'));
     }
-
-   
 
     public function actionCreateFormView(){
         
         $userActions = UserAction::Select(['id as index','action_name as value'])->get()->toArray();
         return Inertia::render('Profile/Partials/CreateActionForm',compact('userActions','userActionType'));
-    }
-
-
-    
-    Public function saveElectricityDetails(Request $request){
-        // Validate the request data
-        $validatedData = $request->validate([
-            'lastReadingDate' => 'required|date',
-            'lastReading' => 'required|numeric',
-            'currentReadingDate' => 'required|date',
-            'currentReading' => 'required|numeric',
-            'perUnitRate' => 'required|numeric',
-        ]);
-        
     }
 
     public function getActionTypeList(string $action_id){
@@ -100,40 +85,9 @@ class ProfileController extends Controller
         
     }
 
-    public function getFormJson(int $action_type_id){
-        try{
-            $formDetails =  FormDetails::where('action_type_id', $action_type_id)->get()->first();
-            return response()->json(['data'=>$formDetails],200);
-        }catch(Exception $e){
-            
-        }
-    }
+   
 
-    public function createNewForm(Request $request){
-         // Validate the request data
-         $validatedData = $request->validate([
-            'action' => 'required|',
-            'action_type' => 'required',
-            'fields' => 'required', // Make sure to handle password confirmation
-        ]);
-        // $formDetails = FormDetails::create([
-        //     'action_type_id' => $validatedData['action_type'],
-        //     'form_json' => json_encode($validatedData['fields']),
-        //     'status' => 1
-        // ]);
-        
-        if($request->input('form_id')){
-echo "!";
-        }else{
-            // $formDetails = FormDetails::create([
-            //     'action_type_id' => $validatedData['action_type'],
-            //     'form_json' => json_encode($validatedData['fields']),
-            //     'status' => 1
-            // ]);
-        }
-        die();
-        return response()->json(['message' => 'Form Created Successfully!!', 'data' => $formDetails], 201);
-    }
+  
 
     public function getFormFields(){
         $formfields = FormFields::Where(['status'=>'Active'])->select(['id','field_type as value'])->get()->toArray();

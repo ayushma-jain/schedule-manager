@@ -33,9 +33,8 @@
   }
   
   .today {
-    background-color: #007bff;
-    color: white;
-    border-radius: 50%;
+    background-color: aquamarine;
+    color: black;
   }
   .sidebar{
     position: fixed;
